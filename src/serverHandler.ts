@@ -11,7 +11,7 @@ export async function setUserData() {
 
 // external servers being used by the project - Please change these to your own if working on something else!
 export const fireBaseServer =
-  'https://us-central1-dcl-guestbook.cloudfunctions.net/app/'
+  'https://us-central1-dmm-deneme.cloudfunctions.net/app/'
 
 // get latest scoreboard data from server
 export async function getGuestBook() {
