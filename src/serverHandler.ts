@@ -19,19 +19,16 @@ export async function getGuestBook() {
   try {
 
     const url = fireBaseServer + 'get-signatures'
-    const body = JSON.stringify({
-      authID: "foo"
-    })
 
-    log(body)
   
     const response = await fetch(url,{
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      body: body
+      headers: { 'Content-Type': 'application/json',
+                  'authID':      'foo'}
     })
+    
     const json = await response.json()
-    //log(json)
+    
     return json
   } catch (e) {
     log('error fetching scores from server ', e)
@@ -45,18 +42,21 @@ export async function signGuestBook() {
   }
   try {
     const url = fireBaseServer + 'add-signature'
+
     const body = JSON.stringify({
       id: (await userData).userId,
       name: (await userData).displayName,
       authID: "foo"
     })
-    log(body)
+ 
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: body
     })
+
     return response.json()
+
   } catch (e) {
     log('error posting to server ', e)
   }

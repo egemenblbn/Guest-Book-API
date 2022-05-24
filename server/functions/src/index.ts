@@ -27,7 +27,9 @@ let signatures = db.collection('Signatures')
 app.get('/get-signatures', async (req: any, res: any) => {
 
   const salt = await bcrypt.genSalt(10); //Generate salt for encryption
-  let userHash = await bcrypt.hash(req.body.authID, salt); //Hash user id
+  let userAuthID = req.header("authID");
+  //res.status(200).send(userAuthID)
+  let userHash = await bcrypt.hash(userAuthID, salt); //Hash user id
   const validPassword = await bcrypt.compare("foo", userHash); //Compare hashed id to password
 
   if (!validPassword) { //If id not valid, return
@@ -36,7 +38,6 @@ app.get('/get-signatures', async (req: any, res: any) => {
 
   try {
     let response: any = []
-    return res.status(403).send("wHat??")
     await signatures.get().then((queryResult: { docs: any }) => {
       for (let doc of queryResult.docs) {
         response.push(doc.data())
