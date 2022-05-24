@@ -42,13 +42,14 @@ let signatures = db.collection('Signatures')
 
 app.get('/get-signatures', async (req: any, res: any) => {
 
-  const salt = await bcrypt.genSalt(10);
-  let userHash = await bcrypt.hash(req.body.authID, salt);
-  const validPassword = await bcrypt.compare("foo", userHash);
+  const salt = await bcrypt.genSalt(10); //Generate salt for encryption
+  let userHash = await bcrypt.hash(req.body.authID, salt); //Hash user id
+  const validPassword = await bcrypt.compare("foo", userHash); //Compare hashed id to password
 
-  if (!validPassword) {
+  if (!validPassword) { //If id not valid, return
     return res.status(403).send("Forbidden")
   }
+
   try {
     let response: any = []
     await signatures.get().then((queryResult: { docs: any }) => {
@@ -65,11 +66,11 @@ app.get('/get-signatures', async (req: any, res: any) => {
 
 app.post('/add-signature', async (req: any, res: any) => {
 
-  const salt = await bcrypt.genSalt(10);
-  let userHash = await bcrypt.hash(req.body.authID, salt);
-  const validPassword = await bcrypt.compare("foo", userHash);
+  const salt = await bcrypt.genSalt(10); //Generate salt for encryption
+  let userHash = await bcrypt.hash(req.body.authID, salt); //Hash user id
+  const validPassword = await bcrypt.compare("foo", userHash); //Compare hashed id to password
 
-  if (!validPassword) {
+  if (!validPassword) { //If id not valid, return
     return res.status(403).send("Forbidden")
   }
   let newSignature = req.body
