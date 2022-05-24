@@ -18,7 +18,6 @@ export async function getGuestBook() {
   log('inside getGuestBook()') //added by eg
   try {
 
-
     const url = fireBaseServer + 'get-signatures'
     const body = JSON.stringify({
       authID: "foo"

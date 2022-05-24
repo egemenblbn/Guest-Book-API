@@ -7,22 +7,6 @@ const bcrypt = require("bcrypt");
 
 exports.app = functions.https.onRequest(app)
 
-//Keccak Hashing
-/*
-const { Keccak } = require('sha3')
-const hash = new Keccak(256)
-hash.update('foo')
-let hashedCode = hash.digest('hex')
-*/
-
-//Bcrypt
-// generate salt to hash password
-/*
-const salt = await bcrypt.genSalt(10);
-let code = "foo"
-let password = await bcrypt.hash(code, salt);
-*/
-
 var admin = require('firebase-admin')
 
 var serviceAccount = require('../permissions.json')
