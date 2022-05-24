@@ -15,9 +15,22 @@ export const fireBaseServer =
 
 // get latest scoreboard data from server
 export async function getGuestBook() {
+  log('inside getGuestBook()') //added by eg
   try {
+
+
     const url = fireBaseServer + 'get-signatures'
-    const response = await fetch(url)
+    const body = JSON.stringify({
+      authID: "foo"
+    })
+
+    log(body)
+  
+    const response = await fetch(url,{
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: body
+    })
     const json = await response.json()
     log(json)
     return json
@@ -35,7 +48,8 @@ export async function signGuestBook() {
     const url = fireBaseServer + 'add-signature'
     const body = JSON.stringify({
       id: (await userData).userId,
-      name: (await userData).displayName
+      name: (await userData).displayName,
+      authID: "foo"
     })
     log(body)
     const response = await fetch(url, {
