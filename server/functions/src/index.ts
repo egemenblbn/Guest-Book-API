@@ -36,6 +36,7 @@ app.get('/get-signatures', async (req: any, res: any) => {
 
   try {
     let response: any = []
+    return res.status(403).send("wHat??")
     await signatures.get().then((queryResult: { docs: any }) => {
       for (let doc of queryResult.docs) {
         response.push(doc.data())

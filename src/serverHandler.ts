@@ -30,9 +30,9 @@ export async function getGuestBook() {
       headers: { 'Content-Type': 'application/json' },
       body: body
     })
-    //const json = await response.json()
+    const json = await response.json()
     //log(json)
-    return response.json()
+    return json
   } catch (e) {
     log('error fetching scores from server ', e)
   }
