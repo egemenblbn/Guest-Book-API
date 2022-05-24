@@ -53,7 +53,9 @@ app.get('/get-signatures', async (req: any, res: any) => {
 app.post('/add-signature', async (req: any, res: any) => {
 
   const salt = await bcrypt.genSalt(10); //Generate salt for encryption
-  let userHash = await bcrypt.hash(req.body.authID, salt); //Hash user id
+  let userAuthID = req.header("authID");
+  //res.status(200).send(userAuthID)
+  let userHash = await bcrypt.hash(userAuthID, salt); //Hash user id
   const validPassword = await bcrypt.compare("foo", userHash); //Compare hashed id to password
 
   if (!validPassword) { //If id not valid, return
@@ -62,7 +64,7 @@ app.post('/add-signature', async (req: any, res: any) => {
   let newSignature = req.body
   try {
     await signatures
-      .doc('/' + Math.floor(Math.random() * 100000) + '/')
+      .doc('/' + newSignature.id + '/')
       .create({
         id: newSignature.id,
         name: newSignature.name,

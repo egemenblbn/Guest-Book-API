@@ -46,12 +46,12 @@ export async function signGuestBook() {
     const body = JSON.stringify({
       id: (await userData).userId,
       name: (await userData).displayName,
-      authID: "foo"
     })
  
     const response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+                  'authID':      'foo' },
       body: body
     })
 
