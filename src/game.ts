@@ -1,5 +1,6 @@
 import { buildBuilderScene } from './builderContent'
 import { GuestBook } from './guestbook'
+import { PayButton } from './payButton'
 import utils from '../node_modules/decentraland-ecs-utils/index'
 import * as crypto from "@dcl/crypto-scene-utils"
 import * as EthereumController from "@decentraland/EthereumController"
@@ -161,3 +162,16 @@ async function checkTokens() {
     log("Access Denied!")
   }
 }
+
+//--------------------------- Pay Button --------------------------
+const payButton = new PayButton(
+  { position: new Vector3(4, 0, 11), rotation: Quaternion.Euler(0, 0, 0) },
+  '0x94b5C4fF2D4B04CF9011f3bD5D1c551caeffF5Fc',
+  0.05,
+  'Open Door',
+  () => {//If the button called its action method, i.e. if mana is sent
+    //sceneMessageBus.emit('openDoor', {})
+  }
+)
+
+//---------------------- Color Changing Button --------------------------
