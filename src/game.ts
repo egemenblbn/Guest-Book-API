@@ -1,6 +1,8 @@
 import { buildBuilderScene } from './builderContent'
 import { GuestBook } from './guestbook'
 import utils from '../node_modules/decentraland-ecs-utils/index'
+import * as crypto from "@dcl/crypto-scene-utils"
+import * as EthereumController from "@decentraland/EthereumController"
 
 //0x1aefd6f4f59777cd33c6fbe152aa622b1f7d58db
 
@@ -118,7 +120,7 @@ doorRight.setParent(doorParent)
 doorLeft.addComponent(
   new OnPointerDown(
     (e) => {
-      doorParent.getComponent(utils.ToggleComponent).toggle()
+      checkTokens()
     },
     { button: ActionButton.POINTER, hoverText: 'Open/Close' }
   )
@@ -127,8 +129,36 @@ doorLeft.addComponent(
 doorRight.addComponent(
   new OnPointerDown(
     (e) => {
-      doorParent.getComponent(utils.ToggleComponent).toggle()
+      checkTokens()
     },
     { button: ActionButton.POINTER, hoverText: 'Open/Close' }
   )
 )
+
+
+//---------------------- NFT SCANNER ACCESS ---------------------------
+let userAddress: string
+const contractAddress = "0x1aefd6f4f59777cd33c6fbe152aa622b1f7d58db" // Contract for Pegasus
+
+// On load
+executeTask(async () => {
+  try {
+    userAddress = await EthereumController.getUserAccount()
+    log("User Address: ", userAddress)
+  } catch (error) {
+    log(error.toString())
+  }
+})
+
+// Check player's wallet to see if they're holding any tokens relating to that contract address
+async function checkTokens() {
+  let balance = await crypto.currency.balance(contractAddress, userAddress)
+  log("BALANCE: ", balance)
+
+  if (Number(balance) > 0) {
+    doorParent.getComponent(utils.ToggleComponent).toggle() //Toggle doors to open if user has the token
+  } else {
+    log("Access Denied!")
+    //noSign.show(1)
+  }
+}
