@@ -16,9 +16,12 @@
     "decentraland-ecs": "latest"
   },
   "dependencies": {
+    "@dcl/crypto-scene-utils": "^1.1.1",
+    "@dcl/ecs-scene-utils": "^1.7.5",
     "cors": "^2.8.5",
     "decentraland-builder-scripts": "latest",
     "decentraland-ecs-utils": "^1.5.2",
+    "eth-connect": "^6.0.2",
     "express": "^4.18.1"
   }
 }
