@@ -135,6 +135,7 @@ export class PayButton extends Entity {
     
       public payFee(): void {
         log('PAYING FEE', this.paymentAmount)
+        log('Serhanin manasi ',crypto.mana.balance(this.address))
     
         crypto.mana.send(this.address, this.paymentAmount, true).then(
           () => {
