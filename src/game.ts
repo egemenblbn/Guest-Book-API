@@ -18,7 +18,7 @@ const guestBook = new GuestBook(
 const wallLeft = new Entity()
 wallLeft.addComponent(
   new Transform({
-    position: new Vector3(5.75, 1, 3),
+    position: new Vector3(5.75, 1, 16),
     scale: new Vector3(1.5, 2, 0.1)
   })
 )
@@ -28,7 +28,7 @@ wallLeft.addComponent(new BoxShape())
 const wallRight = new Entity()
 wallRight.addComponent(
   new Transform({
-    position: new Vector3(2.25, 1, 3),
+    position: new Vector3(2.25, 1, 16),
     scale: new Vector3(1.5, 2, 0.1)
   })
 )
@@ -81,7 +81,7 @@ const doorRightOpen = new Vector3(-1.25, 0, 0)
 const doorParent = new Entity()
 doorParent.addComponent(
   new Transform({
-    position: new Vector3(4, 1, 3)
+    position: new Vector3(4, 1, 16)
   })
 )
 
