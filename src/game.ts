@@ -6,6 +6,7 @@ import utils from '../node_modules/decentraland-ecs-utils/index'
 import * as crypto from "@dcl/crypto-scene-utils"
 import * as EthereumController from "@decentraland/EthereumController"
 import { Interval } from '@dcl/ecs-scene-utils'
+import { sceneMessageBus } from './messageBus'
 
 //0x1aefd6f4f59777cd33c6fbe152aa622b1f7d58db
 
@@ -178,5 +179,17 @@ const payButton = new PayButton(
 
 //---------------------- Color Changing Button --------------------------
 //const interval = new Interval(3000, ()=> {log('deneme')} )
+
+
 const colorButton = new ColorButton(
   { position: new Vector3(4, 0, 9)}, "Start Game", () => {})
+
+  /*
+sceneMessageBus.on("started game", () => {
+  colorButton.startGame()
+})
+
+sceneMessageBus.on("ended game", () => {
+  colorButton.endGame()
+})
+*/
