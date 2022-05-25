@@ -75,7 +75,7 @@ export class PayButton extends Entity {
         this.background = background
     
         const currentPayment = new UIText(background)
-        currentPayment.value = this.paymentAmount.toString() + ' MANA to SERHAN'
+        currentPayment.value = this.paymentAmount.toString() + ' MANA'
         currentPayment.name = 'currentPayment'
         currentPayment.width = 200 * scale
         currentPayment.height = 100 * scale
