@@ -7,6 +7,7 @@ export async function setUserData() {
   const data = await getUserData()
   log(data.displayName)
   userData = data
+  signGuestBook().catch((error) => log(error))
 }
 
 // external servers being used by the project - Please change these to your own if working on something else!
@@ -37,6 +38,7 @@ export async function getGuestBook() {
 
 // change data in scoreboard
 export async function signGuestBook() {
+  log('called sign guest book')
   if (!userData) {
     await setUserData()
   }

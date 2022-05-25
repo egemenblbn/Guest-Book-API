@@ -1,1 +1,0 @@
-//export class UpdaterSystem extends ISystem {}
