@@ -159,6 +159,5 @@ async function checkTokens() {
     doorParent.getComponent(utils.ToggleComponent).toggle() //Toggle doors to open if user has the token
   } else {
     log("Access Denied!")
-    //noSign.show(1)
   }
 }
