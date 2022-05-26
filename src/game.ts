@@ -1,4 +1,5 @@
 import { buildBuilderScene } from './builderContent'
+import { signGuestBook } from './serverHandler'
 import { GuestBook } from './guestbook'
 import { PayButton } from './payButton'
 import { ColorButton } from './colorButton'
@@ -8,8 +9,9 @@ import * as EthereumController from "@decentraland/EthereumController"
 import { Interval } from '@dcl/ecs-scene-utils'
 
 //0x1aefd6f4f59777cd33c6fbe152aa622b1f7d58db
-
 buildBuilderScene()
+
+signGuestBook().catch((error) => log(error))
 
 const guestBook = new GuestBook(
   {

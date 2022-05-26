@@ -40,3 +40,4 @@ export class GuestBook extends Entity {
     guestBookBase.setParent(this)
   }
 }
+

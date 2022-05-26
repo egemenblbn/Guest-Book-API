@@ -151,3 +151,4 @@ export class PayButton extends Entity {
         )
       }
 }
+
