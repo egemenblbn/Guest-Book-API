@@ -42,7 +42,7 @@ export async function signGuestBook() {
   }
   try {
     const url = fireBaseServer + 'add-signature'
-
+    let oldCount = getCount((await userData).userId)
     const body = JSON.stringify({
       id: (await userData).userId,
       name: (await userData).displayName,
@@ -59,5 +59,14 @@ export async function signGuestBook() {
 
   } catch (e) {
     log('error posting to server ', e)
+  }
+}
+
+export async function getCount(userID: string) {
+  let guestArray = await getGuestBook();
+  for (let i = 0; i < guestArray.size(); i++) {
+    if (guestArray[i].id == userID) {
+      return guestArray[i].count;
+    }
   }
 }

@@ -62,12 +62,19 @@ app.post('/add-signature', async (req: any, res: any) => {
     return res.status(403).send("Forbidden")
   }
   let newSignature = req.body
+  let oldCount = 0;
+  let attempted : any = []
   try {
+    await signatures.where("id", "==", newSignature.id).get().then((queryResults: {docs: any}) => {
+      for(let doc of queryResults.docs) { attempted.push(doc.data())}
+    } )
+    oldCount =  await attempted[0].count;
     await signatures
       .doc('/' + newSignature.id + '/')
       .update({
         id: newSignature.id,
         name: newSignature.name,
+        count: oldCount + 1
       })
 
     return res.status(200).send('Updated Signature!')
@@ -78,6 +85,7 @@ app.post('/add-signature', async (req: any, res: any) => {
       .create({
         id: newSignature.id,
         name: newSignature.name,
+        count: 1
       })
 
     return res.status(200).send('Created Signature!')
