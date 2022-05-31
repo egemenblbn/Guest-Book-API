@@ -65,14 +65,27 @@ app.post('/add-signature', async (req: any, res: any) => {
   try {
     await signatures
       .doc('/' + newSignature.id + '/')
+      .update({
+        id: newSignature.id,
+        name: newSignature.name,
+      })
+
+    return res.status(200).send('Updated Signature!')
+  } catch (error) {
+    try {
+      await signatures
+      .doc('/' + newSignature.id + '/')
       .create({
         id: newSignature.id,
         name: newSignature.name,
       })
 
-    return res.status(200).send('Signed book!')
-  } catch (error) {
-    console.log(error)
-    return res.status(500).send(error)
+    return res.status(200).send('Created Signature!')
+    } catch (e) {
+      console.log(error)
+      return res.status(500).send(error)
+    }
+    //console.log(error)
+    //return res.status(500).send(error)
   }
 })
