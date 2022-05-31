@@ -11,7 +11,7 @@ import { Interval } from '@dcl/ecs-scene-utils'
 //0x1aefd6f4f59777cd33c6fbe152aa622b1f7d58db
 buildBuilderScene()
 
-signGuestBook().catch((error) => log(error))
+//signGuestBook().catch((error) => log(error))
 
 const guestBook = new GuestBook(
   {
@@ -159,16 +159,16 @@ executeTask(async () => {
 async function checkTokens() {
   let balance = await crypto.currency.balance(contractAddress, userAddress)
   log("BALANCE: ", balance)
-
   if (Number(balance) > 0) {
     doorParent.getComponent(utils.ToggleComponent).toggle() //Toggle doors to open if user has the token
+    signGuestBook().catch((error) => log(error))
   } else {
     log("Access Denied!")
   }
 }
 
 //--------------------------- Pay Button --------------------------
-const payButton = new PayButton(
+/*const payButton = new PayButton(
   { position: new Vector3(4, 0, 11), rotation: Quaternion.Euler(0, 0, 0) },
   '0x94b5C4fF2D4B04CF9011f3bD5D1c551caeffF5Fc',
   0.05,
@@ -176,9 +176,11 @@ const payButton = new PayButton(
   () => {//If the button called its action method, i.e. if mana is sent
     //sceneMessageBus.emit('openDoor', {})
   }
-)
+)*/
 
 //---------------------- Color Changing Button --------------------------
 //const interval = new Interval(3000, ()=> {log('deneme')} )
-const colorButton = new ColorButton(
+
+/*const colorButton = new ColorButton(
   { position: new Vector3(4, 0, 9)}, "Start Game", () => {})
+  */
